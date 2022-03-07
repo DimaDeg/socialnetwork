@@ -1,0 +1,22 @@
+.header{
+    grid-area: h;
+    border-radius: 15px;
+    position: fixed;
+    width: 1000px;
+    height: 100px;
+}
+
+.header img{
+    margin-left: 30px;
+    width: 50px;
+}
+.header textarea{
+    position: absolute;
+    top: 10px;
+    right: 0;
+    width: 300px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: aqua;
+    font-size: 16px;
+}
