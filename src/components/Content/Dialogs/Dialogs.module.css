@@ -1,28 +1,63 @@
 .dialogsMain{
-    display: grid;
-    grid-template-columns: 3fr 10fr;
+    display: flex;
     line-height: 400%;
     font-size: 16px;
     color: white;
 }
 .dialogs{
-    padding: 15px;
+    background-color: rgb(25,39,52);
+    display: block;
+    width: 30%;
     font-size: large;
+    border-radius: 20px ;
+    margin-left: 20px;
 }
 .dialogs img{
     margin-right: 20px;
     width: 50px;
     height: 50px;
+    background-color: white;
+    border: 2px solid white;
     border-radius: 50%;
     position: relative;
     top: 20px;
+
 }
 
 .messages{
-    padding: 15px;
-}
-.message{
+    display: inline flex;
+    width: 70%;
+    padding: 35px;
+    border-radius: 20px;
+    background-color: rgb(25,39,52);
 
+
+}
+.bubble {
+    color: #15202B;
+    margin: 10px;
+    position: relative;
+    left: 45px;
+    background-color: white;
+    min-width: 200px;
+    max-width: 350px;
+    min-height: 70px;
+    border-radius: 10px;
+    padding: 0;
+}
+
+.bubble:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    z-index: 1;
+    border-style: solid;
+    border-color: transparent white;
+    border-width: 10px 37px 10px 0;
+    top: 60%;
+    left: -37px;
+    margin-top: -10px;
 }
 .active {
     margin: 15px;
