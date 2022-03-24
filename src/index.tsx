@@ -6,6 +6,7 @@ import {App} from './App';
 import {BrowserRouter} from "react-router-dom";
 import {store} from "./Redux/State";
 
+
 const renderTree = () => {
     ReactDOM.render(
         <BrowserRouter>
@@ -15,8 +16,7 @@ const renderTree = () => {
     )
 }
 
-
-store._subscribe(renderTree)
+store._subscribe(()=>{renderTree()})
 renderTree()
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

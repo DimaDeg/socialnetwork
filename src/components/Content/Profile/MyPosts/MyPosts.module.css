@@ -1,9 +1,8 @@
 .border{
-    margin: 10px 200px 10px 100px;
-    background-color: #15202B;
+    margin: 40px 200px 10px 40px;
+    background-color: #2d3741;
     border-radius: 20px;
     color: white;
-    background-color: rgb(25,39,52);
 }
 s.i{
     display: flex;
@@ -11,8 +10,19 @@ s.i{
     justify-content: center;
     align-items: center;
 }
-.item{
-    padding: 10px;
-    margin: 10px;
+.h2{
+    text-align: center;
+}
+.h3{
+    margin-left: 20px;
+}
+.in{
+    margin-left: 20px;
+}
+.in button{
+    margin-left: 10px;
+}
+.post{
+
 }
 

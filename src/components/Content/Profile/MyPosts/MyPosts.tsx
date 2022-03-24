@@ -1,22 +1,24 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import s from "./MyPosts.module.css";
-import {ActionTypesType, ProfilePageType} from "../../../../Redux/State";
+import {PostType, ProfilePageType} from "../../../../Redux/State";
 import {Post} from './Post/Post';
-import {AddPostAC, UpdatePostTextAC} from "../../../../Redux/ProfileReducer";
 
 type MyPostsType = {
-    ProfilePage: ProfilePageType
-    dispatch: (action: ActionTypesType) => void
+    posts: PostType[]
+    postText: string
+    updatePostText: (text: string) => void
+    addPost: (text: string) => void
 }
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
-    let postsElements = props.ProfilePage.posts.map(p => <Post key={p.id} id={p.id} post={p.post}
-                                                               likeCount={p.likeCount}/>)
+
+    let postsElements = props.posts.map(p => <div className={s.post}><Post key={p.id}
+                                                                           id={p.id}
+                                                                           post={p.post}
+                                                                           likeCount={p.likeCount}/></div>)
 
     const addPostHandler = () => {
-        if (props.ProfilePage.newPostText?.trim()) {
-            props.dispatch(AddPostAC(props.ProfilePage.newPostText))
-        }
+        props.addPost(props.postText)
     }
 
     const onKeyAddPost = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -25,23 +27,22 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
     }
 
     const updatePostTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.dispatch(UpdatePostTextAC(e.currentTarget.value))
+        props.updatePostText(e.currentTarget.value)
     }
 
 
     return (
 
         <div className={s.border}>
-            <h2>My posts</h2>
+            <h2 className={s.h2}>My posts</h2>
             <div className={s.item}>
-                <h3>New Post</h3>
-                <div>
-                    <input value={props.ProfilePage.newPostText}
+                <h3 className={s.h3}>New Post</h3>
+                <div className={s.in}>
+                    <input value={props.postText}
                            placeholder={'Enter Post Text...'}
-                              onKeyPress={onKeyAddPost}
-                              onChange={updatePostTextHandler}/>
-                </div>
-                <div>
+                           onKeyPress={onKeyAddPost}
+                           onChange={updatePostTextHandler}
+                    />
                     <button onClick={addPostHandler}>Add Post</button>
                 </div>
             </div>

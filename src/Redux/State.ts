@@ -104,31 +104,4 @@ export const store: StoreType = {
         this._onChange()
     }
 
-    /*if (action.type === 'ADD-POST') {
-        const newPost: PostType = {
-            id: new Date().getTime(),
-            post: action.text,
-            likeCount: 0
-        };
-        this._state.ProfilePage.posts.push(newPost)
-        this._state.ProfilePage.newPostText = ''
-        this._onChange()
-    } else if (action.type === 'UPDATE-POST-TEXT') {
-        this._state.ProfilePage.newPostText = action.text
-        this._onChange()
-
-    } else if (action.type === 'UPDATE-MESSAGE-TEXT') {
-        this._state.DialogsPage.newMessage = action.message
-        this._onChange()
-    } else if (action.type === 'SEND-MESSAGE') {
-        const newMessage: MessageType = {
-            id: new Date().getTime(),
-            message: action.message
-        };
-        this._state.DialogsPage.messages.push(newMessage)
-        this._state.DialogsPage.newMessage = ''
-        this._onChange()
-    }
-}*/
-
 }

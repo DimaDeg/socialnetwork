@@ -8,9 +8,9 @@ export const Post: React.FC<PostType> = (props) => {
     return (
         <div className={s.item}>
             <img src='https://publicdomainvectors.org/tn_img/Male-Avatar-2.webp' alt={props.post}/>
-            <span key={props.id}>{props.post}</span>
+            <div className={s.post} key={props.id}>{props.post}</div>
             <div>
-                <span>Like {props.likeCount}</span>
+                <span className={s.like}>Like {props.likeCount}</span>
             </div>
         </div>
     )

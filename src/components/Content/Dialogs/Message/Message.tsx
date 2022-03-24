@@ -8,7 +8,5 @@ export const Message:React.FC<MessageType> = (props:MessageType) => {
         <div key={props.id}>
             {props.message}
         </div>
-
     )
-
 }

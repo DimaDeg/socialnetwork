@@ -1,13 +1,13 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
-import s from './Dialogs.module.css';
+import s from "./Dialogs.module.css"
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
-import {ActionTypesType, DialogsPageType} from "../../../Redux/State";
-import {SendMessageAC, UpdateMessageTextAC} from "../../../Redux/DialogsReducer";
+import {DialogsPageType} from "../../../Redux/State";
 
 type MyDialogsType = {
     DialogsPage: DialogsPageType
-    dispatch: (action: ActionTypesType) => void
+    sendMessage: ()=>void
+    updateMessage: (message:string)=>void
 }
 
 export const Dialogs: React.FC<MyDialogsType> = (props) => {
@@ -21,18 +21,18 @@ export const Dialogs: React.FC<MyDialogsType> = (props) => {
                                                                         message={m.message}/>
     </div>)
 
-    const sendPostHandler = () => {
+    const sendMessageHandler = () => {
         if (props.DialogsPage.newMessage?.trim())
-            props.dispatch(SendMessageAC(props.DialogsPage.newMessage))
+            props.sendMessage()
     }
 
-    const updateMessageHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.dispatch(UpdateMessageTextAC(e.currentTarget.value))
+    const updateMessageTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        props.updateMessage(e.currentTarget.value)
     }
 
     const onKeySendMessage = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            sendPostHandler()
+            sendMessageHandler()
         }
     }
 
@@ -43,8 +43,9 @@ export const Dialogs: React.FC<MyDialogsType> = (props) => {
                 <input value={props.DialogsPage.newMessage}
                        placeholder={'Enter Message...'}
                        onKeyPress={onKeySendMessage}
-                       onChange={updateMessageHandler}/>
-                <button onClick={sendPostHandler}>send</button>
+                       onChange={updateMessageTextHandler}
+                />
+                <button onClick={sendMessageHandler}>Send</button>
             </div>
             <div className={s.dialogs}>
                 {dialogsElement}
