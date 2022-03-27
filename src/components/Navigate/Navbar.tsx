@@ -8,6 +8,7 @@ export const Navbar = () => {
     return (
 
         <nav className={s.nav}>
+
             <div >
                 <NavLink to={PATH.PROFILE} className={f => f.isActive ? s.active : s.item}>Profile</NavLink>
             </div>

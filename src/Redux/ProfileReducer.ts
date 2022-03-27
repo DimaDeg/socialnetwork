@@ -1,4 +1,15 @@
-import {ActionTypesType, PostType} from "./State";
+import {ActionTypesType} from "./State";
+
+export type PostType = {
+    id: number
+    post: string
+    likeCount: number
+}
+export type ProfilePageType = {
+    posts: Array<PostType>
+    newPostText: string
+}
+
 
 const initialState = {
     posts: [
@@ -9,29 +20,27 @@ const initialState = {
 }
 
 
-export const ProfileReducer = (ProfilePage=initialState, action: ActionTypesType) => {
+export const ProfileReducer = (state: ProfilePageType = initialState, action: ActionTypesType): ProfilePageType => {
+
     switch (action.type) {
-        case 'ADD-POST':
-            const newPost: PostType = {
+        case 'ADD-POST': {
+            let newPost: PostType = {
                 id: new Date().getTime(),
-                post: action.text,
+                post: state.newPostText,
                 likeCount: 0
             };
-            ProfilePage.posts.push(newPost)
-            ProfilePage.newPostText = ''
-            return ProfilePage
+            return  {...state,newPostText:'',posts: [newPost,...state.posts,]}
 
-        case 'UPDATE-POST-TEXT':
-            ProfilePage.newPostText = action.text
-            return ProfilePage
-
+        }
+        case 'UPDATE-POST-TEXT': {
+            return  {...state,newPostText: action.text}
+        }
         default :
-            return ProfilePage
+            return state
     }
 }
-export const AddPostAC = (text: string) => ({
+export const AddPostAC = () => ({
     type: 'ADD-POST',
-    text
 } as const)
 
 export const UpdatePostTextAC = (text: string) => ({

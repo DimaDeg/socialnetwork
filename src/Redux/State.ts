@@ -1,30 +1,30 @@
 import {AddPostAC, ProfileReducer, UpdatePostTextAC} from "./ProfileReducer";
 import {DialogsReducer, SendMessageAC, UpdateMessageTextAC} from "./DialogsReducer";
 
-export type MessageType = {
+type MessageType = {
     id: number
     message: string
 }
-export type DialogType = {
+type DialogType = {
     avatar: string
     id: number
     name: string
 }
-export type PostType = {
+type PostType = {
     id: number
     post: string
     likeCount: number
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessage: string
 }
-export type FriendsType = {
+type FriendsType = {
     avatar: string
     id: number
     name: string

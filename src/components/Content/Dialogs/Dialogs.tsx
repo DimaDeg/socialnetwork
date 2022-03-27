@@ -2,28 +2,27 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from "./Dialogs.module.css"
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
-import {DialogsPageType} from "../../../Redux/State";
+import {DialogsPageType} from "./DialogsContainer";
 
-type MyDialogsType = {
-    DialogsPage: DialogsPageType
-    sendMessage: ()=>void
-    updateMessage: (message:string)=>void
-}
 
-export const Dialogs: React.FC<MyDialogsType> = (props) => {
+export const Dialogs: React.FC<DialogsPageType> = (props) => {
 
-    let dialogsElement = props.DialogsPage.dialogs.map(d => <div className={s.item}><Dialog avatar={d.avatar}
-                                                                         name={d.name}
-                                                                         id={d.id}/>
+    let dialogsElement = props.DialogsPage.dialogs.map((d) => <div key={d.id} className={s.item}>
+        <Dialog
+            avatar={d.avatar}
+            name={d.name}
+            id={d.id}/>
     </div>)
 
-    let messagesElements = props.DialogsPage.messages.map(m => <div className={s.bubble}><Message id={m.id}
-                                                                        message={m.message}/>
+    let messagesElements = props.DialogsPage.messages.map((m) => <div key={m.id} className={s.bubble}>
+        <Message
+            id={m.id}
+            message={m.message}/>
     </div>)
 
     const sendMessageHandler = () => {
         if (props.DialogsPage.newMessage?.trim())
-            props.sendMessage()
+            props.sendMessage(props.DialogsPage.newMessage)
     }
 
     const updateMessageTextHandler = (e: ChangeEvent<HTMLInputElement>) => {

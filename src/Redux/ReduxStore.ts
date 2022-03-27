@@ -3,9 +3,11 @@ import {ProfileReducer} from "./ProfileReducer";
 import {DialogsReducer} from "./DialogsReducer";
 
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     ProfilePage: ProfileReducer,
     DialogsPage: DialogsReducer
 })
 
-export let store = createStore(reducers)
+export type AppStateType = ReturnType<typeof rootReducer>
+
+export let store = createStore(rootReducer)

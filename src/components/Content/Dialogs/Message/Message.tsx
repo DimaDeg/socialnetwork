@@ -1,5 +1,5 @@
 import React from "react";
-import {MessageType} from "../../../../Redux/State";
+import {MessageType} from "../../../../Redux/DialogsReducer";
 
 
 

@@ -1,16 +1,9 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "./MyPosts.module.css";
-import {PostType, ProfilePageType} from "../../../../Redux/State";
 import {Post} from './Post/Post';
+import {MyPostsPageType} from "./MyPostsContainer";
 
-type MyPostsType = {
-    posts: PostType[]
-    postText: string
-    updatePostText: (text: string) => void
-    addPost: (text: string) => void
-}
-
-export const MyPosts: React.FC<MyPostsType> = (props) => {
+export const MyPosts: React.FC<MyPostsPageType> = (props) => {
 
     let postsElements = props.posts.map(p => <div className={s.post}><Post key={p.id}
                                                                            id={p.id}
@@ -18,7 +11,8 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
                                                                            likeCount={p.likeCount}/></div>)
 
     const addPostHandler = () => {
-        props.addPost(props.postText)
+        if (props.postText?.trim())
+            props.addPost()
     }
 
     const onKeyAddPost = (e: KeyboardEvent<HTMLInputElement>) => {
