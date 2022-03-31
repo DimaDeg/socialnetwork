@@ -16,6 +16,9 @@ export const Navbar = () => {
                 <NavLink to={PATH.DIALOGS} className={f => f.isActive ? s.active : s.item}>Massages</NavLink>
             </div>
             <div>
+                <NavLink to={PATH.USERS} className={f => f.isActive ? s.active : s.item}>Users</NavLink>
+            </div>
+            <div>
                 <NavLink to={PATH.NEWS} className={f => f.isActive ? s.active : s.item}>News</NavLink>
             </div>
             <div>
