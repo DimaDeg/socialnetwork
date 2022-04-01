@@ -15,6 +15,7 @@ export type UsersType = {
     },
     status: string | null
     followed: boolean
+    location?: LocationType
 }
 
 export type InitialUsersType = {
