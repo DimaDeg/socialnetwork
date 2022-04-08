@@ -11,8 +11,10 @@ export const MyPosts: React.FC<MyPostsPageType> = (props) => {
                                                                            likeCount={p.likeCount}/></div>)
 
     const addPostHandler = () => {
-        if (props.postText?.trim())
+        if (props.postText?.trim()) {
             props.addPost()
+        }
+        props.updatePostText('')
     }
 
     const onKeyAddPost = (e: KeyboardEvent<HTMLInputElement>) => {

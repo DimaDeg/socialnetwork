@@ -1,34 +1,46 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../../Redux/ReduxStore";
-import {FollowUserAC, InitialUsersType, SetUsersAC, UnfollowUserAC, UsersType} from "../../../Redux/UsersReducer";
+import {
+    FollowUserAC,
+    InitialUsersType,
+    SetActivePageAC,
+    SetUsersAC, SetUsersCountAC,
+    UnfollowUserAC,
+    UsersType
+} from "../../../Redux/UsersReducer";
 import {Dispatch} from "redux";
 import {UsersClass} from "./UsersClass";
 
 type MapStateType = {
     usersPage: InitialUsersType
+
 }
 
 type mapDispatchToPropsType = {
-    follow: (id:number)=>void
-    unfollow: (id:number)=>void
-    setUsers: (users: UsersType[])=>void
+    follow: (id: number) => void
+    unfollow: (id: number) => void
+    setUsers: (users: UsersType[]) => void
+    setActivePage: (currentPage: number) => void
+    setUsersCount: (totalCount: number) => void
 }
 
 export type UsersContainerType = MapStateType & mapDispatchToPropsType
 
-const mapStateToProps = (state: AppStateType):MapStateType => {
-  return {
-      usersPage: state.UsersPage
-  }
+const mapStateToProps = (state: AppStateType): MapStateType => {
+    return {
+        usersPage: state.UsersPage
+    }
 
 
 }
-const mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType => {
-  return{
-      setUsers:(users:UsersType[])=>dispatch(SetUsersAC(users)),
-      follow:(id)=>dispatch(FollowUserAC(id)),
-      unfollow:(id)=>dispatch(UnfollowUserAC(id))
-  }
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+    return {
+        setUsers: (users: UsersType[]) => dispatch(SetUsersAC(users)),
+        follow: (id) => dispatch(FollowUserAC(id)),
+        unfollow: (id) => dispatch(UnfollowUserAC(id)),
+        setActivePage: (currentPage: number) => dispatch(SetActivePageAC(currentPage)),
+        setUsersCount: (totalCount: number) => dispatch(SetUsersCountAC(totalCount))
+    }
 }
 
-export const UsersContainer = connect(mapStateToProps,mapDispatchToProps)(UsersClass)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass)

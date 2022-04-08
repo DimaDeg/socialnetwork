@@ -20,49 +20,16 @@ export type UsersType = {
 
 export type InitialUsersType = {
     users: UsersType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 const initialState: InitialUsersType = {
-    users: []/*[{
-        : 'https://publicdomainvectors.org/tn_img/Male-Avatar-2.webp',
-        followed: true,
-        id: 1,
-        name: 'Dima',
-        status: 'lod',
-        location: {city: 'Minsk', country: 'RB'}
-    },
-        {
-            avatar: 'https://download-cs.net/steam/avatars/3447.jpg',
-            followed: true,
-            id: 2,
-            name: 'Vasya',
-            status: 'lod',
-            location: {city: 'SPB', country: 'RF'}
-        },
-        {
-            avatar: 'https://download-cs.net/steam/avatars/3446.jpg',
-            followed: false,
-            id: 3,
-            name: 'Petya',
-            status: 'lod',
-            location: {city: 'Moscow', country: 'RF'}
-        },
-        {
-            avatar: 'https://download-cs.net/steam/avatars/3404.jpg',
-            followed: false,
-            id: 4,
-            name: 'Senya',
-            status: 'lod',
-            location: {city: 'Vitebsk', country: 'RB'}
-        },
-        {
-            avatar: 'https://download-cs.net/steam/avatars/3117.jpg',
-            followed: true,
-            id: 5,
-            name: 'Lesya',
-            status: 'lod',
-            location: {city: 'Brest', country: 'RB'}
-        }]*/
+    users: [],
+    pageSize: 10,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 
@@ -76,8 +43,13 @@ export const UsersReducer = (state: InitialUsersType = initialState, action: Act
             return {...state, users: state.users.map(f => f.id === action.UserId ? {...f, followed: false} : f)}
         }
         case "SET-USERS": {
-            debugger
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        }
+        case "SET-ACTIVE-PAGE": {
+            return {...state, currentPage: action.currentPage}
+        }
+        case "SET-USERS-COUNT":{
+            return {...state,totalUsersCount:action.usersCount}
         }
         default :
             return state
@@ -95,4 +67,12 @@ export const SetUsersAC = (users: UsersType[]) => ({
     type: 'SET-USERS',
     users
 } as const)
+export const SetActivePageAC = (currentPage: number) => ({
+    type: 'SET-ACTIVE-PAGE',
+    currentPage
+} as const)
+export const SetUsersCountAC = (usersCount:number)=>({
+    type: 'SET-USERS-COUNT',
+    usersCount
+}as const)
 

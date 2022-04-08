@@ -21,8 +21,10 @@ export const Dialogs: React.FC<DialogsPageType> = (props) => {
     </div>)
 
     const sendMessageHandler = () => {
-        if (props.DialogsPage.newMessage?.trim())
+        if (props.DialogsPage.newMessage?.trim()) {
             props.sendMessage(props.DialogsPage.newMessage)
+        }
+        props.updateMessage('')
     }
 
     const updateMessageTextHandler = (e: ChangeEvent<HTMLInputElement>) => {

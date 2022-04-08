@@ -17,7 +17,7 @@ export const PATH={
     NEWS: '/News',
     MUSIC: '/Music',
     SETTINGS: '/Settings',
-    USERS: '/UsersClass'
+    USERS: '/Users'
 }
 
 export const App = () => {
