@@ -1,7 +1,7 @@
 import {createStore, combineReducers} from 'redux'
 import {ProfileReducer} from "./ProfileReducer";
 import {DialogsReducer} from "./DialogsReducer";
-import {UsersReducer} from "./UsersReducer";
+import {UsersReducer} from "./users-reducer";
 
 
 const rootReducer = combineReducers({

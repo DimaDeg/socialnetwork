@@ -1,12 +1,12 @@
-import {AddPostAC, ProfileReducer, UpdatePostTextAC} from "./ProfileReducer";
-import {DialogsReducer, SendMessageAC, UpdateMessageTextAC} from "./DialogsReducer";
+import {AddPostAC, UpdatePostTextAC} from "./ProfileReducer";
+import { SendMessageAC, UpdateMessageTextAC} from "./DialogsReducer";
 import {
-    SetActivePageAC,
-    FollowUserAC,
-    SetUsersAC,
-    UnfollowUserAC,
-    SetUsersCountAC
-} from "./UsersReducer";
+    setActivePage,
+    followUser,
+    setUsers,
+    unfollowUser,
+    setUsersCount, toggleIsFetching
+} from "./users-reducer";
 
 type MessageType = {
     id: number
@@ -43,7 +43,6 @@ export type SidebarType = {
 export type RootStateType = {
     ProfilePage: ProfilePageType
     DialogsPage: DialogsPageType
-    /*    Sidebar: SidebarType*/
 }
 export type StoreType = {
     _state: RootStateType
@@ -54,63 +53,7 @@ export type StoreType = {
 
 }
 export type ActionTypesType = ReturnType<typeof AddPostAC> | ReturnType<typeof UpdatePostTextAC>
-    | ReturnType<typeof UpdateMessageTextAC> | ReturnType<typeof SendMessageAC> | ReturnType<typeof SetUsersAC> |
-    ReturnType<typeof FollowUserAC> | ReturnType<typeof UnfollowUserAC> | ReturnType<typeof SetActivePageAC> |
-    ReturnType<typeof SetUsersCountAC>
+    | ReturnType<typeof UpdateMessageTextAC> | ReturnType<typeof SendMessageAC> | ReturnType<typeof setUsers> |
+    ReturnType<typeof followUser> | ReturnType<typeof unfollowUser> | ReturnType<typeof setActivePage> |
+    ReturnType<typeof setUsersCount> | ReturnType<typeof toggleIsFetching>
 
-
-export const store: StoreType = {
-
-    _onChange() {
-        console.log('state changed')
-    },
-    _subscribe(observer: () => void) {
-        this._onChange = observer
-    },
-    getState() {
-        return this._state
-    },
-    _state: {
-
-        ProfilePage: {
-            posts: [
-                {id: 1, post: 'First Post', likeCount: 15},
-                {id: 2, post: 'Second Post', likeCount: 20}
-            ],
-            newPostText: ''
-        },
-
-        DialogsPage: {
-            dialogs: [
-                {avatar: 'https://publicdomainvectors.org/tn_img/Male-Avatar-2.webp', id: 1, name: 'Dima'},
-                {avatar: 'https://download-cs.net/steam/avatars/3447.jpg', id: 2, name: 'Vasya'},
-                {avatar: 'https://download-cs.net/steam/avatars/3446.jpg', id: 3, name: 'Petya'},
-                {avatar: 'https://download-cs.net/steam/avatars/3404.jpg', id: 4, name: 'Senya'},
-                {avatar: 'https://download-cs.net/steam/avatars/3117.jpg', id: 5, name: 'Lesya'}
-            ],
-            messages: [
-                {id: 1, message: 'dqweqwrq'},
-                {id: 2, message: 'fsdfas'},
-                {id: 3, message: 'tyer'},
-                {id: 4, message: 'hdsfbxc'},
-                {id: 5, message: 'ooretw'}
-            ],
-            newMessage: ''
-        }
-        /*    ,
-            Sidebar: {
-                friends: [
-                    {avatar: 'https://download-cs.net/steam/avatars/3447.jpg', id: 6, name: 'Kirill', info: ''},
-                    {avatar: 'https://download-cs.net/steam/avatars/3446.jpg', id: 7, name: 'Kostya', info: ''},
-                    {avatar: 'https://download-cs.net/steam/avatars/3404.jpg', id: 8, name: 'Andrey', info: ''},
-                ]
-            }*/
-
-    },
-    dispatch(action) {
-        ProfileReducer(this._state.ProfilePage, action)
-        DialogsReducer(this._state.DialogsPage, action)
-        this._onChange()
-    }
-
-}

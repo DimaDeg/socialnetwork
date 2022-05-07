@@ -1,10 +1,5 @@
 import {ActionTypesType} from "./State";
 
-type LocationType = {
-    city: string
-    country: string
-}
-
 export type UsersType = {
     name: string
     id: number
@@ -15,7 +10,6 @@ export type UsersType = {
     },
     status: string | null
     followed: boolean
-    location?: LocationType
 }
 
 export type InitialUsersType = {
@@ -23,13 +17,15 @@ export type InitialUsersType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 const initialState: InitialUsersType = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 
@@ -51,28 +47,34 @@ export const UsersReducer = (state: InitialUsersType = initialState, action: Act
         case "SET-USERS-COUNT":{
             return {...state,totalUsersCount:action.usersCount}
         }
+        case "TOGGLE-IS-FETCHING":{
+            return {...state,isFetching:!state.isFetching}
+        }
         default :
             return state
     }
 }
-export const FollowUserAC = (UserId: number) => ({
+export const followUser = (UserId: number) => ({
     type: 'FOLLOW-USER',
     UserId
 } as const)
-export const UnfollowUserAC = (UserId: number) => ({
+export const unfollowUser = (UserId: number) => ({
     type: 'UNFOLLOW-USER',
     UserId
 } as const)
-export const SetUsersAC = (users: UsersType[]) => ({
+export const setUsers = (users: UsersType[]) => ({
     type: 'SET-USERS',
     users
 } as const)
-export const SetActivePageAC = (currentPage: number) => ({
+export const setActivePage = (currentPage: number) => ({
     type: 'SET-ACTIVE-PAGE',
     currentPage
 } as const)
-export const SetUsersCountAC = (usersCount:number)=>({
+export const setUsersCount = (usersCount:number)=>({
     type: 'SET-USERS-COUNT',
     usersCount
+}as const)
+export const toggleIsFetching = () => ({
+    type: 'TOGGLE-IS-FETCHING'
 }as const)
 

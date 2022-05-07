@@ -1,19 +1,19 @@
-.app-wrapper{
-  margin: auto;
-  display: grid;
-
-  width: 70% ;
-  grid-template-areas:
+.app-wrapper {
+    margin: auto;
+    display: grid;
+    min-width: 70%;
+    max-width: 1080px;
+    grid-template-areas:
   "h h"
   "n c";
-  grid-template-rows: 60px 1fr;
-  grid-template-columns:2fr 10fr;
-  grid-gap: 10px;
+    grid-template-rows: 60px 1fr;
+    grid-template-columns:2fr 10fr;
+    grid-gap: 10px;
 }
 
-.app-wrapper-content{
-  grid-area: c;
-  border-radius: 15px;
+.app-wrapper-content {
+    grid-area: c;
+    border-radius: 15px;
 
 }
 
