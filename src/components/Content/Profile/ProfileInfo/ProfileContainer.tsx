@@ -48,7 +48,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-export const withCustomWithRouter = <P extends object>(Component: React.ComponentType<P>): React.FC => {
+export const CustomWithRouter = <P extends object>(Component: React.ComponentType<P>): React.FC => {
 
     return function WithProps (props: any) {
         const params = useParams()
@@ -58,4 +58,4 @@ export const withCustomWithRouter = <P extends object>(Component: React.Componen
     }
 }
 
-export let ProfileContainer = (connect(mapStateToProps, {setUserProfile}),withCustomWithRouter)(ProfileContainerAPI)
+export let ProfileContainer = ((connect(mapStateToProps, {setUserProfile})),CustomWithRouter)(ProfileContainerAPI)
