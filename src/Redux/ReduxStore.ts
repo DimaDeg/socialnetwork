@@ -1,5 +1,5 @@
 import {createStore, combineReducers} from 'redux'
-import {ProfileReducer} from "./ProfileReducer";
+import {ProfileReducer} from "./profile-reducer";
 import {DialogsReducer} from "./DialogsReducer";
 import {UsersReducer} from "./users-reducer";
 

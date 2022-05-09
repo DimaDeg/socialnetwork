@@ -2,6 +2,7 @@ import s from "./Users.module.css";
 import avatar from "../../../assets/images/user.png";
 import React from "react";
 import {InitialUsersType} from "../../../Redux/users-reducer";
+import {NavLink} from "react-router-dom";
 
 type UsersClassType = {
     onPageChanged: (page: number) => void
@@ -33,8 +34,11 @@ export const UsersClass: React.FC<UsersClassType> = ({onPageChanged, usersPage, 
         {usersPage.users.map(f =>
 
             <div className={s.element} key={f.id}>
-                <div><img className={s.avatar} src={f.photos.small ? f.photos.small : avatar} alt={f.name}/>
-                </div>
+
+                <NavLink to={`/profile/${f.id}`}>
+                    <div><img className={s.avatar} src={f.photos.small ? f.photos.small : avatar} alt={f.name}/>
+                    </div>
+                </NavLink>
                 <span>
                             <span>{f.name}</span>
                             <span>{f.status}</span>

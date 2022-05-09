@@ -1,13 +1,26 @@
 import React from "react";
 import s from './ProfileInfo.module.css'
+import {ProfileUserType} from "../../../../Redux/profile-reducer";
+import {Preloader} from "../../Common/Preloader/Preloader";
+import user from '../../../../assets/images/user.png'
 
-export const ProfileInfo = () => {
-    return(
+type ProfileInfoPropsType = {
+    profile: ProfileUserType | null
+/*    status: string
+    updateStatus: (statusText: string) => void*/
+}
+
+export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile}) => {
+    if (!profile) {
+        return <Preloader/>
+    }
+
+    return (
         <div>
-            <div >
+            <div>
                 <img
                     className={s.bi}
-                    src='https://www.researchgate.net/profile/Georg-Waltner-2/publication/329620436/figure/fig1/AS:759099822206979@1557994909846/Image-sequence-and-views-of-the-reconstructed-point-cloud-a-j-images-from-the.ppm'
+                    src={profile?.photos.large ? profile.photos.large : user}
                     alt={''}/>
             </div>
             <div className={s.item}>
@@ -15,5 +28,4 @@ export const ProfileInfo = () => {
             </div>
         </div>
     )
-
 }

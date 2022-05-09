@@ -1,4 +1,4 @@
-import {AddPostAC, UpdatePostTextAC} from "./ProfileReducer";
+import {addPostAC, setUserProfile, updatePostTextAC} from "./profile-reducer";
 import { SendMessageAC, UpdateMessageTextAC} from "./DialogsReducer";
 import {
     setActivePage,
@@ -52,8 +52,8 @@ export type StoreType = {
     dispatch: (action: ActionTypesType) => void
 
 }
-export type ActionTypesType = ReturnType<typeof AddPostAC> | ReturnType<typeof UpdatePostTextAC>
+export type ActionTypesType = ReturnType<typeof addPostAC> | ReturnType<typeof updatePostTextAC>
     | ReturnType<typeof UpdateMessageTextAC> | ReturnType<typeof SendMessageAC> | ReturnType<typeof setUsers> |
     ReturnType<typeof followUser> | ReturnType<typeof unfollowUser> | ReturnType<typeof setActivePage> |
-    ReturnType<typeof setUsersCount> | ReturnType<typeof toggleIsFetching>
+    ReturnType<typeof setUsersCount> | ReturnType<typeof toggleIsFetching>| ReturnType<typeof setUserProfile>
 
