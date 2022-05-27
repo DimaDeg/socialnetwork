@@ -17,7 +17,7 @@ export const UsersClass: React.FC<UsersClassType> = ({onPageChanged, usersPage, 
 
 
     let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
+    for (let i = 1; i <= 20; i++) {
         pages.push(i)
     }
 
@@ -31,23 +31,19 @@ export const UsersClass: React.FC<UsersClassType> = ({onPageChanged, usersPage, 
             )}
 
         </div>
-        {usersPage.users.map(f =>
-
-            <div className={s.element} key={f.id}>
-
-                <NavLink to={`/profile/${f.id}`}>
-                    <div><img className={s.avatar} src={f.photos.small ? f.photos.small : avatar} alt={f.name}/>
-                    </div>
-                </NavLink>
-                <span>
+        {usersPage.users.map(f => <div className={s.element} key={f.id}>
+            <NavLink to={`/profile/${f.id}`}>
+                <img className={s.avatar} src={f.photos.large ? f.photos.large : avatar} alt={f.name}/>
+            </NavLink>
+            <span>
                             <span>{f.name}</span>
                             <span>{f.status}</span>
                         </span>
-                <div>
-                    {f.followed ?
-                        <button onClick={() => unfollow(f.id)}>Unfollow</button> :
-                        <button onClick={() => follow(f.id)}>Follow</button>}
-                </div>
-            </div>)}
+            <div>
+                {f.followed ?
+                    <button onClick={() => unfollow(f.id)}>Unfollow</button> :
+                    <button onClick={() => follow(f.id)}>Follow</button>}
+            </div>
+        </div>)}
     </div>
 }

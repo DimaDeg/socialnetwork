@@ -1,4 +1,4 @@
-import {InitialDialogsType, SendMessageAC, UpdateMessageTextAC} from "../../../Redux/DialogsReducer";
+import {InitialDialogsType, SendMessageAC, UpdateMessageTextAC} from "../../../Redux/dialogs-reducer";
 import {Dialogs} from './Dialogs';
 import {AppStateType} from "../../../Redux/ReduxStore";
 import {Dispatch} from "redux";

@@ -48,7 +48,7 @@ const initialState: ProfilePageType = {
     ],
     newPostText: '',
     profile: null,
-    status: ''
+    status: '',
 }
 
 
