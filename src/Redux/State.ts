@@ -5,7 +5,7 @@ import {
     followUser,
     setUsers,
     unfollowUser,
-    setUsersCount, toggleIsFetching
+    setUsersCount, toggleIsFetching, toggleIsFollowing
 } from "./users-reducer";
 import {setAuthUserData} from "./auth-reducer";
 
@@ -57,5 +57,5 @@ export type ActionTypesType = ReturnType<typeof addPostAC> | ReturnType<typeof u
     | ReturnType<typeof UpdateMessageTextAC> | ReturnType<typeof SendMessageAC> | ReturnType<typeof setUsers> |
     ReturnType<typeof followUser> | ReturnType<typeof unfollowUser> | ReturnType<typeof setActivePage> |
     ReturnType<typeof setUsersCount> | ReturnType<typeof toggleIsFetching>| ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof setAuthUserData> | ReturnType<typeof toggleIsFollowing>
 

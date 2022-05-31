@@ -10,8 +10,6 @@
     float: right;
 }
 .loginBlock a{
-    position: absolute;
-    top:20px;
     text-decoration: none;
     color: white;
     font-size: 20px;

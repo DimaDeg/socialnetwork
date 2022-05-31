@@ -5,16 +5,19 @@ import {
     InitialUsersType,
     setActivePage,
     setUsers, setUsersCount, toggleIsFetching,
+    toggleIsFollowing,
     unfollowUser,
     UsersType
 } from "../../../Redux/users-reducer";
 import React from "react";
-import axios from "axios";
 import {UsersClass} from "./UsersClass";
 import {Preloader} from "../Common/Preloader/Preloader";
+import {userAPI} from "../../../API/UserAPI";
+
 
 export type MapStateType = {
     usersPage: InitialUsersType,
+    isFetching: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -24,29 +27,32 @@ type mapDispatchToPropsType = {
     setActivePage: (currentPage: number) => void
     setUsersCount: (totalCount: number) => void
     toggleIsFetching: () => void
+    toggleIsFollowing: (id: number, isFetching: boolean) => void
 }
+
 
 export type UsersContainerType = MapStateType & mapDispatchToPropsType
 
 export class UsersContainer extends React.Component<UsersContainerType> {
 
+
     componentDidMount() {
         this.props.toggleIsFetching()
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`)
-            .then(response => {
+        userAPI.getUser(this.props.usersPage.currentPage, this.props.usersPage.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching()
-                this.props.setUsers(response.data.items)
-                this.props.setUsersCount(response.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setUsersCount(data.totalCount)
             })
     }
 
     onPageChanged = (page: number) => {
         this.props.toggleIsFetching()
         this.props.setActivePage(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersPage.pageSize}`)
-            .then(response => {
+        userAPI.getUser(page, this.props.usersPage.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching()
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
     }
 
@@ -56,7 +62,9 @@ export class UsersContainer extends React.Component<UsersContainerType> {
             <UsersClass onPageChanged={this.onPageChanged}
                         usersPage={this.props.usersPage}
                         follow={(id: number) => this.props.followUser(id)}
-                        unfollow={(id: number) => this.props.unfollowUser(id)}/>
+                        unfollow={(id: number) => this.props.unfollowUser(id)}
+                        toggleIsFollowing={(id: number, isFetching: boolean) => this.props.toggleIsFollowing(id, isFetching)}
+                        isFetching={false}            />
         </>
     }
 }
@@ -64,12 +72,15 @@ export class UsersContainer extends React.Component<UsersContainerType> {
 const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
         usersPage: state.UsersPage,
+        isFetching:state.UsersPage.isFetching
     }
 }
 
 
-export default connect(mapStateToProps, {setUsers, followUser, unfollowUser,
-    setActivePage, setUsersCount, toggleIsFetching})(UsersContainer)
+export default connect(mapStateToProps, {
+    setUsers, followUser, unfollowUser,
+    setActivePage, setUsersCount, toggleIsFetching, toggleIsFollowing
+})(UsersContainer)
 
 
 

@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/ReduxStore";
 import {getAuthUserData, setAuthUserData} from "../../Redux/auth-reducer";
 import axios from "axios";
-import {resetFirstInputPolyfill} from "web-vitals/dist/modules/lib/polyfills/firstInputPolyfill";
+
 
 type MapStatePropsType = {
     login: string | null
@@ -21,7 +21,6 @@ type HeaderContainerPropsType = MapStatePropsType & MapDispatchPropsType
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
 
     componentDidMount() {
-        // this.props.getAuthUserData()
         axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true})
             .then(res => {
                 if (res.data.resultCode === 0) {
