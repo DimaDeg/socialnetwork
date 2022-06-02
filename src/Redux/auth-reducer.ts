@@ -1,7 +1,7 @@
 import {ActionTypesType} from "./State";
-import axios from "axios";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./ReduxStore";
+import {authApi} from "../API/userApi";
 
 export type AuthType = {
     id: number | null
@@ -27,7 +27,7 @@ export const AuthReducer = (state: AuthType = initialState, action: ActionTypesT
     }
 }
 
-export const setAuthUserData = (id: number | null, login: string | null, email: string | null) => ({
+export const setAuthUserData = (id: number | null, login: string | null, email: string | null, isAuth: boolean) => ({
     type: 'SET-USER-DATA', data: {id, login, email}
 } as const)
 
@@ -38,12 +38,11 @@ type ThunkDispatchActionType = ThunkDispatch<AppStateType, unknown, ActionTypesT
 
 
 export const getAuthUserData = (): ThunkType => (dispatch: ThunkDispatchActionType) => {
-    axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {
-        withCredentials: true
-    }).then(res => {
-        if (res.data.resultCode === 0) {
-            const {id, login, email} = res.data.data
-            dispatch(setAuthUserData(id, login, email))
-        }
-    })
+    authApi.me()
+        .then(res => {
+            if (res.resultCode === 0) {
+                const {id, login, email} = res.data
+                dispatch(setAuthUserData(id, login, email, true))
+            }
+        })
 }

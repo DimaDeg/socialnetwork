@@ -1,5 +1,4 @@
 import React from "react";
-import s from './ProfileInfo.module.css'
 import {ProfileUserType} from "../../../../Redux/profile-reducer";
 import {Preloader} from "../../Common/Preloader/Preloader";
 import userPhoto from '../../../../assets/images/user.png'
@@ -10,26 +9,19 @@ type ProfileInfoPropsType = {
         updateStatus: (statusText: string) => void*/
 }
 
-export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile}) => {
+export const
+    ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile}) => {
 
     if (!profile) {
         return <Preloader/>
     }
 
 
-
-
     return (
         <div>
-            <div>
-
-            </div>
-            <div className={s.item}>
-                <img
-                    src={profile?.photos.small ? profile.photos.small : userPhoto}
+                <img src={profile?.photos.small ? profile.photos.small : userPhoto}
                     alt={''}/>
                 <div>{profile.fullName}</div>
-            </div>
         </div>
     )
 }

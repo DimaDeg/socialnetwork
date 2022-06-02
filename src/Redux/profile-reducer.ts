@@ -1,4 +1,7 @@
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { AppStateType } from "./ReduxStore";
 import {ActionTypesType} from "./State";
+import {profileApi} from "../API/userApi";
 
 export type PostType = {
     id: number
@@ -68,12 +71,14 @@ export const ProfileReducer = (state: ProfilePageType = initialState, action: Ac
             return {...state, newPostText: action.text}
         }
         case 'SET_USER_PROFILE': {
-            return {...state, profile:action.profile}
+            return {...state, profile: action.profile}
         }
         default :
             return state
     }
 }
+
+////action creators
 export const addPostAC = () => ({
     type: 'ADD-POST',
 } as const)
@@ -87,3 +92,12 @@ export const setUserProfile = (profile: ProfileUserType) => ({
     profile
 } as const)
 
+
+/////////thunks
+type ThunkType = ThunkAction<void, AppStateType, unknown, ActionTypesType>
+type ThunkDispatchActionType = ThunkDispatch<AppStateType, unknown, ActionTypesType>
+
+export const getProfile = (id: number):ThunkType => (dispatch:ThunkDispatchActionType) => {
+    profileApi.getProfile(id)
+        .then(data=>dispatch(setUserProfile(data)))
+}

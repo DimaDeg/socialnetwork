@@ -1,44 +1,43 @@
 import React, {JSXElementConstructor} from "react";
 import {Profile} from "./Profile";
-import axios from "axios";
 import {AppStateType} from "../../../Redux/ReduxStore";
 import {connect} from "react-redux";
-import {ProfilePageType, ProfileUserType, setUserProfile} from "../../../Redux/profile-reducer";
+import {getProfile, ProfileUserType} from "../../../Redux/profile-reducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {compose} from 'redux';
+import {Login} from "../Login/login";
 
 
 type MapStatePropsType = {
     profile: ProfileUserType | null
+    isAuth: boolean
     // status: string
 }
 
 type MapDispatchPropsType = {
-    setUserProfile: (profile: ProfilePageType) => void
+    getProfile: (id: number) => void
     // updateStatus: (status:string) => void
 }
 
 type ProfileContainerType = MapStatePropsType & MapDispatchPropsType
 
-class ProfileContainer extends React.Component<ProfileContainerType & {params:{ userId: string }}>{
+class ProfileContainer extends React.Component<ProfileContainerType & { params: { userId: string } }, {}> {
 
     componentDidMount() {
-        let userId = this.props.params.userId
-        if (!userId){
-            userId = '2'
+        let userId = Number(this.props.params.userId)
+        if (!userId) {
+            userId = 2
         }
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(response => {
-                console.log(response.data)
-                this.props.setUserProfile(response.data)
-            })
+        this.props.getProfile(userId)
     }
 
     render() {
+
+        if (!this.props.isAuth) return <Login/>
+
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile} />
+                <Profile {...this.props} profile={this.props.profile}/>
             </div>
         )
     }
@@ -46,15 +45,16 @@ class ProfileContainer extends React.Component<ProfileContainerType & {params:{ 
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        profile: state.ProfilePage.profile
+        profile: state.ProfilePage.profile,
+        isAuth: state.Auth.isAuth
     }
 }
 
 export const CustomWithRouter = <P extends object>(Component: React.ComponentType<P>): React.FC => {
-    return function WithProps (props: any) {
+    return function WithProps(props: any) {
         const params = useParams()
         return (
-            <Component {...props} params={params} />
+            <Component {...props} params={params}/>
         )
     }
 }
@@ -74,4 +74,4 @@ export const withRouter = (Component: JSXElementConstructor<any>): JSXElementCon
     return ComponentWithRouterProp;
 }
 
-export default compose<React.ComponentType>((connect(mapStateToProps, {setUserProfile})),CustomWithRouter)(ProfileContainer)
+export default compose<React.ComponentType>((connect(mapStateToProps, {getProfile})), CustomWithRouter)(ProfileContainer)
