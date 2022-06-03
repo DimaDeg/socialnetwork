@@ -3,26 +3,30 @@
     height: 80px;
     border-radius: 50%;
 }
-
-.element {
-    margin: 20px;
-    width: 600px;
-    height: 200px;
-    color: white;
+.pages{
+    display: flex;
+    justify-content: space-around;
 }
 
+.element {
+    display: flex;
+    margin: 20px;
+    justify-content: space-around;
+    height: 80%;
+    width: 80%;
+    color: white;
+}
 .page {
     color: white;
     font-size: 16px;
-    margin: 5px;
 }
 
 .selectPage {
     color: white;
     font-size: 18px;
     font-weight: bold;
-    margin: 5px;
     cursor: pointer;
+
 }
 .page:hover{
     cursor: pointer;
@@ -32,4 +36,12 @@
     justify-content: center;
     align-items: center;
     background-color: cornflowerblue;
+}
+.back{
+    width: 800px;
+    background-color: #192734;
+}
+.users{
+    display: flex;
+    flex-direction: column;
 }

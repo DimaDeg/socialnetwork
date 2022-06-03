@@ -3,7 +3,6 @@ import s from "./Dialogs.module.css"
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
 import {DialogsPageType} from "./DialogsContainer";
-import {Login} from "../Login/login";
 
 
 export const Dialogs: React.FC<DialogsPageType> = (props) => {
@@ -37,8 +36,6 @@ export const Dialogs: React.FC<DialogsPageType> = (props) => {
             sendMessageHandler()
         }
     }
-
-    if(!props.isAuth) return <Login/>
 
     return (
         <div className={s.dialogsMain}>

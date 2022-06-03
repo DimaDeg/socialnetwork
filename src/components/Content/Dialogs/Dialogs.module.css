@@ -3,6 +3,8 @@
     line-height: 400%;
     font-size: 16px;
     color: white;
+    justify-content: center;
+    width: 800px;
 }
 .dialogs{
     background-color: rgb(25,39,52);

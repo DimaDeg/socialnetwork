@@ -10,6 +10,7 @@ import {
 import React from "react";
 import {UsersClass} from "./UsersClass";
 import {Preloader} from "../Common/Preloader/Preloader";
+import {compose} from "redux";
 
 
 export type MapStateType = {
@@ -58,10 +59,9 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
     }
 }
 
-
-export default connect(mapStateToProps, {
+export default compose(connect(mapStateToProps, {
     follow,unfollow,setActivePage, getUsers
-})(UsersContainer)
+}))(UsersContainer)
 
 
 

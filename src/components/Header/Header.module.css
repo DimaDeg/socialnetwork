@@ -1,13 +1,20 @@
 .header {
+    display: flex;
     grid-area: h;
+    background-color: #2d3741;
+    justify-content: space-between;
 }
 
 .header img {
     width: 50px;
 }
 
-.loginBlock {
-    float: right;
+.loginBlock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right:20px;
+    position: relative;
 }
 .loginBlock a{
     text-decoration: none;
