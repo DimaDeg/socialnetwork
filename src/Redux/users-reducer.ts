@@ -1,7 +1,7 @@
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./ReduxStore";
 import {ActionTypesType} from "./State";
-import {UserApi} from "../API/userApi";
+import {Api} from "../API/Api";
 
 export type UsersType = {
     name: string
@@ -102,7 +102,7 @@ type ThunkDispatchActionType = ThunkDispatch<AppStateType, unknown, ActionTypesT
 
 export const getUsers = (currentPage: number, pageSize: number): ThunkType => (dispatch: ThunkDispatchActionType) => {
     dispatch(toggleIsFetching())
-    UserApi.getUser(currentPage, pageSize)
+    Api.getUser(currentPage, pageSize)
         .then(data => {
             dispatch(toggleIsFetching())
             dispatch(setUsers(data.items))
@@ -112,7 +112,7 @@ export const getUsers = (currentPage: number, pageSize: number): ThunkType => (d
 
 export const follow = (id: number): ThunkType => (dispatch: ThunkDispatchActionType) => {
     dispatch(toggleIsFollowing(id, true))
-    UserApi.follow(id)
+    Api.follow(id)
         .then(data => {
             if (data.resultCode === 0) {
                 dispatch(followUser(id))
@@ -123,7 +123,7 @@ export const follow = (id: number): ThunkType => (dispatch: ThunkDispatchActionT
 
 export const unfollow = (id: number): ThunkType => (dispatch: ThunkDispatchActionType) => {
     dispatch(toggleIsFollowing(id, true))
-    UserApi.unfollow(id)
+    Api.unfollow(id)
         .then(data => {
             if (data.resultCode === 0) {
                 dispatch(unfollowUser(id))

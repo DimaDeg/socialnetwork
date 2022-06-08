@@ -9,8 +9,12 @@ export type MessageType = {
     id: number
     message: string
 }
+export type DialogsPageType = {
+    dialogs: Array<DialogType>;
+    messages: Array<MessageType>;
+}
 
-const initialState = {
+const initialState: DialogsPageType = {
     dialogs: [
         {avatar: 'https://publicdomainvectors.org/tn_img/Male-Avatar-2.webp', id: 1, name: 'Dima'},
         {avatar: 'https://download-cs.net/steam/avatars/3447.jpg', id: 2, name: 'Vasya'},
@@ -25,33 +29,25 @@ const initialState = {
         {id: 4, message: 'hdsfbxc'},
         {id: 5, message: 'ooretw'}
     ] as MessageType[],
-    newMessage: ''
 }
+
 export type InitialDialogsType = typeof initialState
 
 export const DialogsReducer = (state: InitialDialogsType = initialState, action: ActionTypesType) => {
 
     switch (action.type) {
-        case 'UPDATE-MESSAGE-TEXT': {
-            return {...state, newMessage: action.message}
-        }
         case 'SEND-MESSAGE': {
-            let sendMessage: MessageType = {
+            let newMessage: MessageType = {
                 id: new Date().getTime(),
-                message: state.newMessage
+                message: action.message
             };
-            return  {...state, newMessage: '', messages: [...state.messages, sendMessage]}
+            return  {...state, newMessage: '', messages: [...state.messages, newMessage]}
         }
-
         default:
             return state
     }
 }
 
-export const UpdateMessageTextAC = (message: string) => ({
-    type: 'UPDATE-MESSAGE-TEXT',
-    message
-} as const)
-export const SendMessageAC = () => ({
-    type: 'SEND-MESSAGE'
+export const SendMessageAC = (message: string) => ({
+    type: 'SEND-MESSAGE',message
 } as const)

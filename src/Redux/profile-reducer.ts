@@ -1,7 +1,7 @@
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AppStateType } from "./ReduxStore";
 import {ActionTypesType} from "./State";
-import {profileApi} from "../API/userApi";
+import {profileApi} from "../API/Api";
 
 export type PostType = {
     id: number
@@ -61,14 +61,12 @@ export const ProfileReducer = (state: ProfilePageType = initialState, action: Ac
         case 'ADD-POST': {
             let newPost: PostType = {
                 id: new Date().getTime(),
-                post: state.newPostText,
+                post: action.text,
                 likeCount: 0
             };
             return {...state, newPostText: '', posts: [newPost, ...state.posts,]}
 
-        }
-        case 'UPDATE-POST-TEXT': {
-            return {...state, newPostText: action.text}
+
         }
         case 'SET_USER_PROFILE': {
             return {...state, profile: action.profile}
@@ -79,14 +77,11 @@ export const ProfileReducer = (state: ProfilePageType = initialState, action: Ac
 }
 
 ////action creators
-export const addPostAC = () => ({
-    type: 'ADD-POST',
+export const addPostAC = (text:string) => ({
+    type: 'ADD-POST',text
 } as const)
 
-export const updatePostTextAC = (text: string) => ({
-    type: 'UPDATE-POST-TEXT',
-    text
-} as const)
+
 export const setUserProfile = (profile: ProfileUserType) => ({
     type: 'SET_USER_PROFILE',
     profile

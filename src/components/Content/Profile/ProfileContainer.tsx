@@ -11,22 +11,22 @@ import {CustomWithRouter} from "../../../HOC/withRouter";
 
 type MapStatePropsType = {
     profile: ProfileUserType | null
-    status: string
+    status: string,
+    authorizedUserId: number | null
 }
 
 type MapDispatchPropsType = {
     getProfile: (id: number) => void
-    // updateStatus: (status:string) => void
 }
 
 type ProfileContainerType = MapStatePropsType & MapDispatchPropsType
 
-class ProfileContainer extends React.Component<ProfileContainerType & { params: { userId: string } }, {}> {
+class ProfileContainer extends React.Component<ProfileContainerType & { params: { userId: number } }, {}> {
 
     componentDidMount() {
         let userId = Number(this.props.params.userId)
-        if (!userId) {
-            userId = 2
+        if (!userId && this.props.authorizedUserId) {
+            userId = this.props.authorizedUserId
         }
         this.props.getProfile(userId)
     }
@@ -44,7 +44,8 @@ class ProfileContainer extends React.Component<ProfileContainerType & { params: 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         profile: state.ProfilePage.profile,
-        status:state.ProfilePage.status
+        status:state.ProfilePage.status,
+        authorizedUserId: state.Auth.id
     }
 }
 
