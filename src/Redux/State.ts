@@ -1,4 +1,4 @@
-import {addPostAC, setUserProfile} from "./profile-reducer";
+import {addPostAC, setStatus, setUserProfile} from "./profile-reducer";
 import { SendMessageAC} from "./dialogs-reducer";
 import {
     setActivePage,
@@ -8,6 +8,7 @@ import {
     setUsersCount, toggleIsFetching, toggleIsFollowing
 } from "./users-reducer";
 import {setAuthUserData} from "./auth-reducer";
+import {setInitialized} from "./app-reducer";
 
 type MessageType = {
     id: number
@@ -56,5 +57,6 @@ export type StoreType = {
 export type ActionTypesType = ReturnType<typeof addPostAC> | ReturnType<typeof SendMessageAC> | ReturnType<typeof setUsers> |
     ReturnType<typeof followUser> | ReturnType<typeof unfollowUser> | ReturnType<typeof setActivePage> |
     ReturnType<typeof setUsersCount> | ReturnType<typeof toggleIsFetching>| ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setAuthUserData> | ReturnType<typeof toggleIsFollowing>
+    | ReturnType<typeof setAuthUserData> | ReturnType<typeof toggleIsFollowing> | ReturnType<typeof setInitialized>
+    | ReturnType<typeof setStatus>
 

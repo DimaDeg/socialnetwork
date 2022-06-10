@@ -11,11 +11,11 @@ import React from "react";
 import {UsersClass} from "./UsersClass";
 import {Preloader} from "../Common/Preloader/Preloader";
 import {compose} from "redux";
+import {getUsersPages} from "../../../Redux/users-selector";
 
 
 export type MapStateType = {
-    usersPage: InitialUsersType,
-    isFetching: boolean
+    usersPage: InitialUsersType
 }
 
 type mapDispatchToPropsType = {
@@ -52,12 +52,19 @@ export class UsersContainer extends React.Component<UsersContainerType> {
     }
 }
 
+// const mapStateToProps = (state: AppStateType): MapStateType => {
+//     return {
+//         usersPage: state.UsersPage,
+//         isFetching: state.UsersPage.isFetching
+//     }
+// }
 const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
-        usersPage: state.UsersPage,
-        isFetching: state.UsersPage.isFetching
+        usersPage: getUsersPages(state)
     }
 }
+
+
 
 export default compose(connect(mapStateToProps, {
     follow,unfollow,setActivePage, getUsers

@@ -102,6 +102,7 @@ type ThunkDispatchActionType = ThunkDispatch<AppStateType, unknown, ActionTypesT
 
 export const getUsers = (currentPage: number, pageSize: number): ThunkType => (dispatch: ThunkDispatchActionType) => {
     dispatch(toggleIsFetching())
+    dispatch(setActivePage(currentPage))
     Api.getUser(currentPage, pageSize)
         .then(data => {
             dispatch(toggleIsFetching())

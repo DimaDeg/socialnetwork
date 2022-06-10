@@ -9,7 +9,7 @@ import s from './ProfileInfo.module.css'
 type ProfileInfoPropsType = {
     profile: ProfileUserType | null
     status: string
-    //updateStatus: (statusText: string) => void
+    updateStatus: (statusText: string) => void
 }
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile,...props}) => {

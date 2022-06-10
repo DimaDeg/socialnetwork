@@ -7,6 +7,7 @@ import s from './Profile.module.css'
 type ProfilePropsType = {
     profile: ProfileUserType | null
     status: string
+    updateStatus: (statusText: string) => void
 }
 
 

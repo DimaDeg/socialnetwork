@@ -71,6 +71,9 @@ export const ProfileReducer = (state: ProfilePageType = initialState, action: Ac
         case 'SET_USER_PROFILE': {
             return {...state, profile: action.profile}
         }
+        case 'SET_STATUS': {
+            return {...state, status: action.statusText}
+        }
         default :
             return state
     }
@@ -87,6 +90,9 @@ export const setUserProfile = (profile: ProfileUserType) => ({
     profile
 } as const)
 
+export const setStatus = (statusText: string) => ({type: 'SET_STATUS', statusText}) as const
+
+
 
 /////////thunks
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionTypesType>
@@ -95,4 +101,18 @@ type ThunkDispatchActionType = ThunkDispatch<AppStateType, unknown, ActionTypesT
 export const getProfile = (id: number):ThunkType => (dispatch:ThunkDispatchActionType) => {
     profileApi.getProfile(id)
         .then(data=>dispatch(setUserProfile(data)))
+}
+
+export const getStatus = (userId: number): ThunkType => (dispatch: ThunkDispatchActionType) => {
+    profileApi.getStatus(userId)
+        .then(res => dispatch(setStatus(res.data)))
+}
+
+export const updateStatus = (statusText: string): ThunkType => (dispatch: ThunkDispatchActionType) => {
+    profileApi.updateStatus(statusText)
+        .then(res => {
+            if(res.data.resultCode === 0) {
+                dispatch(setStatus(statusText))
+            }
+        })
 }
