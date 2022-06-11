@@ -52,12 +52,6 @@ export class UsersContainer extends React.Component<UsersContainerType> {
     }
 }
 
-// const mapStateToProps = (state: AppStateType): MapStateType => {
-//     return {
-//         usersPage: state.UsersPage,
-//         isFetching: state.UsersPage.isFetching
-//     }
-// }
 const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
         usersPage: getUsersPages(state)
