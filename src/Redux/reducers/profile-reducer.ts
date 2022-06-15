@@ -61,7 +61,7 @@ export const ProfileReducer = (state: ProfilePageType = initialState, action: Ac
         case 'ADD-POST': {
             let newPost: PostType = {
                 id: new Date().getTime(),
-                post: action.text,
+                post: action.post,
                 likeCount: 0
             };
             return {...state, newPostText: '', posts: [newPost, ...state.posts,]}
@@ -80,8 +80,8 @@ export const ProfileReducer = (state: ProfilePageType = initialState, action: Ac
 }
 
 ////action creators
-export const addPostAC = (text:string) => ({
-    type: 'ADD-POST',text
+export const addPostAC = (post:string) => ({
+    type: 'ADD-POST',post
 } as const)
 
 

@@ -4,15 +4,13 @@ import {Post} from './Post/Post';
 import {MyPostsPageType} from "./MyPostsContainer";
 import {PostForm} from "./PostForm";
 
-export const MyPosts: React.FC<MyPostsPageType> = (props) => {
+export const MyPosts: React.FC<MyPostsPageType> = React.memo((props) => {
 
     let postsElements = props.posts.map(p => <div key={p.id} className={s.post}><Post id={p.id}
                                                                            post={p.post}
                                                                            likeCount={p.likeCount}/></div>)
 
-
     return (
-
         <div className={s.border}>
             <h2 className={s.h2}>My posts</h2>
             <div className={s.item}>
@@ -22,4 +20,4 @@ export const MyPosts: React.FC<MyPostsPageType> = (props) => {
             {postsElements}
         </div>
     )
-}
+})
