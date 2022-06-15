@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Header.module.css"
 import {NavLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {logout} from "../../Redux/auth-reducer";
+import {logout} from "../../Redux/reducers/auth-reducer";
 
 type HeaderType = {
     login: string | null

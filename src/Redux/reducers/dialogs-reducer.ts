@@ -1,4 +1,4 @@
-import {ActionTypesType} from "./State";
+import {ActionTypesType} from "../State";
 
 export type DialogType = {
     avatar: string

@@ -1,14 +1,14 @@
-import {addPostAC, setStatus, setUserProfile} from "./profile-reducer";
-import { SendMessageAC} from "./dialogs-reducer";
+import {addPostAC, setStatus, setUserProfile} from "./reducers/profile-reducer";
+import { SendMessageAC} from "./reducers/dialogs-reducer";
 import {
     setActivePage,
     followUser,
     setUsers,
     unfollowUser,
     setUsersCount, toggleIsFetching, toggleIsFollowing
-} from "./users-reducer";
-import {setAuthUserData} from "./auth-reducer";
-import {setInitialized} from "./app-reducer";
+} from "./reducers/users-reducer";
+import {setAuthUserData} from "./reducers/auth-reducer";
+import {setInitialized} from "./reducers/app-reducer";
 
 type MessageType = {
     id: number

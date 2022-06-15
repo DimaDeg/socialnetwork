@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../Redux/ReduxStore";
-import {AuthType, login} from "../../../Redux/auth-reducer";
+import {AuthType, login} from "../../../Redux/reducers/auth-reducer";
 import {Navigate} from "react-router-dom";
 import * as Yup from 'yup';
 import {ErrorMessage, Field, Form, Formik} from "formik";

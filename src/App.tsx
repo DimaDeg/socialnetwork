@@ -13,7 +13,7 @@ import {DialogsContainer} from "./components/Content/Dialogs/DialogsContainer";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {CustomWithRouter} from "./HOC/withRouter";
-import {initializeApp} from "./Redux/app-reducer";
+import {initializeApp} from "./Redux/reducers/app-reducer";
 import {AppStateType} from "./Redux/ReduxStore";
 import {Preloader} from "./components/Content/Common/Preloader/Preloader";
 

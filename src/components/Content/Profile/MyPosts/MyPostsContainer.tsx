@@ -1,4 +1,4 @@
-import {addPostAC, PostType} from "../../../../Redux/profile-reducer";
+import {addPostAC, PostType} from "../../../../Redux/reducers/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../../Redux/ReduxStore";

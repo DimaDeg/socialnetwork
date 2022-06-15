@@ -1,5 +1,5 @@
 import React from "react";
-import {ProfileUserType} from "../../../../Redux/profile-reducer";
+import {ProfileUserType} from "../../../../Redux/reducers/profile-reducer";
 import {Preloader} from "../../Common/Preloader/Preloader";
 import userPhoto from '../../../../assets/images/user.png'
 import {ProfileStatus} from "./ProfileStatus";

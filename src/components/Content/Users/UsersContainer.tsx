@@ -6,12 +6,12 @@ import {
     InitialUsersType,
     setActivePage,
     unfollow,
-} from "../../../Redux/users-reducer";
+} from "../../../Redux/reducers/users-reducer";
 import React from "react";
 import {UsersClass} from "./UsersClass";
 import {Preloader} from "../Common/Preloader/Preloader";
 import {compose} from "redux";
-import {getUsersPages} from "../../../Redux/users-selector";
+import {getUsersBySelector} from "../../../Redux/users-selector";
 
 
 export type MapStateType = {
@@ -53,8 +53,7 @@ export class UsersContainer extends React.Component<UsersContainerType> {
 }
 
 const mapStateToProps = (state: AppStateType): MapStateType => {
-    return {
-        usersPage: getUsersPages(state)
+    return {        usersPage: getUsersBySelector(state)
     }
 }
 

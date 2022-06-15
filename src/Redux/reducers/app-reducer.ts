@@ -1,6 +1,6 @@
-import {ActionTypesType} from "./State";
+import {ActionTypesType} from "../State";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
-import {AppStateType} from "./ReduxStore";
+import {AppStateType} from "../ReduxStore";
 import {getAuthUserData} from "./auth-reducer";
 
 export type InitialStateType = {

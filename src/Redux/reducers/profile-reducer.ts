@@ -1,7 +1,7 @@
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { AppStateType } from "./ReduxStore";
-import {ActionTypesType} from "./State";
-import {profileApi} from "../API/Api";
+import { AppStateType } from "../ReduxStore";
+import {ActionTypesType} from "../State";
+import {profileApi} from "../../API/Api";
 
 export type PostType = {
     id: number
