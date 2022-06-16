@@ -26,9 +26,7 @@ class ProfileContainer extends React.Component<ProfileContainerType & { params: 
 
     componentDidMount() {
         let userId = Number(this.props.params.userId)
-        if (!userId && this.props.authorizedUserId) {
-            userId = this.props.authorizedUserId
-        }
+        userId = userId ? userId : 2
         this.props.getProfile(userId)
         this.props.getStatus(userId)
 

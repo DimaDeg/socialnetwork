@@ -19,7 +19,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile,...props}) 
 
         return (
             <div>
-                <img className={s.ava} src={profile?.photos.small ? profile.photos.small : userPhoto}
+                <img className={s.ava} src={profile.photos.small ? profile.photos.small : userPhoto}
                      alt={''}/>
 
                 <span style={{color:'white',fontSize:20}}>   {profile.fullName}</span>

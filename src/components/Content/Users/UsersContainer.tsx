@@ -32,12 +32,14 @@ export class UsersContainer extends React.Component<UsersContainerType> {
 
 
     componentDidMount() {
-        this.props.getUsers(this.props.usersPage.currentPage,this.props.usersPage.pageSize)
+        let {currentPage, pageSize} = this.props.usersPage
+        this.props.getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (page: number) => {
+        let {pageSize} = this.props.usersPage
         this.props.setActivePage(page)
-        this.props.getUsers(page,this.props.usersPage.pageSize)
+        this.props.getUsers(page, pageSize)
     }
 
     render() {
@@ -47,20 +49,20 @@ export class UsersContainer extends React.Component<UsersContainerType> {
                         usersPage={this.props.usersPage}
                         follow={(id: number) => this.props.follow(id)}
                         unfollow={(id: number) => this.props.unfollow(id)}
-                        />
+            />
         </>
     }
 }
 
 const mapStateToProps = (state: AppStateType): MapStateType => {
-    return {        usersPage: getUsersBySelector(state)
+    return {
+        usersPage: getUsersBySelector(state)
     }
 }
 
 
-
 export default compose(connect(mapStateToProps, {
-    follow,unfollow,setActivePage, getUsers
+    follow, unfollow, setActivePage, getUsers
 }))(UsersContainer)
 
 

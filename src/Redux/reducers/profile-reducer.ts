@@ -1,7 +1,7 @@
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "../ReduxStore";
 import {ActionTypesType} from "../State";
-import {profileApi} from "../../API/Api";
+import {profileApi} from "../../API/UserApi";
 
 export type PostType = {
     id: number
@@ -104,21 +104,19 @@ export const deletePost = (id: number) => ({
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionTypesType>
 type ThunkDispatchActionType = ThunkDispatch<AppStateType, unknown, ActionTypesType>
 
-export const getProfile = (id: number): ThunkType => (dispatch: ThunkDispatchActionType) => {
-    profileApi.getProfile(id)
-        .then(data => dispatch(setUserProfile(data)))
+export const getProfile = (id: number): ThunkType => async (dispatch: ThunkDispatchActionType) => {
+    let res = await profileApi.getProfile(id)
+    dispatch(setUserProfile(res.data))
 }
 
-export const getStatus = (userId: number): ThunkType => (dispatch: ThunkDispatchActionType) => {
-    profileApi.getStatus(userId)
-        .then(res => dispatch(setStatus(res.data)))
+export const getStatus = (userId: number): ThunkType => async (dispatch: ThunkDispatchActionType) => {
+    let res = await profileApi.getStatus(userId)
+    dispatch(setStatus(res.data))
 }
 
-export const updateStatus = (statusText: string): ThunkType => (dispatch: ThunkDispatchActionType) => {
-    profileApi.updateStatus(statusText)
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(setStatus(statusText))
-            }
-        })
+export const updateStatus = (statusText: string): ThunkType => async (dispatch: ThunkDispatchActionType) => {
+    let res = await profileApi.updateStatus(statusText)
+    if (res.data.resultCode === 0) {
+        dispatch(setStatus(statusText))
+    }
 }
