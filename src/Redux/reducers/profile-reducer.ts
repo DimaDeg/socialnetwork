@@ -1,5 +1,5 @@
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { AppStateType } from "../ReduxStore";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {AppStateType} from "../ReduxStore";
 import {ActionTypesType} from "../State";
 import {profileApi} from "../../API/Api";
 
@@ -74,14 +74,17 @@ export const ProfileReducer = (state: ProfilePageType = initialState, action: Ac
         case 'SET_STATUS': {
             return {...state, status: action.statusText}
         }
+        case 'DELETE-POST': {
+            return {...state, posts: state.posts.filter(f => f.id !== action.id)}
+        }
         default :
             return state
     }
 }
 
 ////action creators
-export const addPostAC = (post:string) => ({
-    type: 'ADD-POST',post
+export const addPostAC = (post: string) => ({
+    type: 'ADD-POST', post
 } as const)
 
 
@@ -92,15 +95,18 @@ export const setUserProfile = (profile: ProfileUserType) => ({
 
 export const setStatus = (statusText: string) => ({type: 'SET_STATUS', statusText}) as const
 
+export const deletePost = (id: number) => ({
+    type: 'DELETE-POST', id
+} as const)
 
 
 /////////thunks
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionTypesType>
 type ThunkDispatchActionType = ThunkDispatch<AppStateType, unknown, ActionTypesType>
 
-export const getProfile = (id: number):ThunkType => (dispatch:ThunkDispatchActionType) => {
+export const getProfile = (id: number): ThunkType => (dispatch: ThunkDispatchActionType) => {
     profileApi.getProfile(id)
-        .then(data=>dispatch(setUserProfile(data)))
+        .then(data => dispatch(setUserProfile(data)))
 }
 
 export const getStatus = (userId: number): ThunkType => (dispatch: ThunkDispatchActionType) => {
@@ -111,7 +117,7 @@ export const getStatus = (userId: number): ThunkType => (dispatch: ThunkDispatch
 export const updateStatus = (statusText: string): ThunkType => (dispatch: ThunkDispatchActionType) => {
     profileApi.updateStatus(statusText)
         .then(res => {
-            if(res.data.resultCode === 0) {
+            if (res.data.resultCode === 0) {
                 dispatch(setStatus(statusText))
             }
         })
