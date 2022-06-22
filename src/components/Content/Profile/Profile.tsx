@@ -8,11 +8,12 @@ type ProfilePropsType = {
     profile: ProfileUserType | null
     status: string
     updateStatus: (statusText: string) => void
+    isOwner: boolean
+    savePhoto: (photo:File) => void
 }
 
 
-export const Profile:React.FC<ProfilePropsType> = (props) => {
-
+export const Profile: React.FC<ProfilePropsType> = (props) => {
 
     return (
         <div className={s.back}>

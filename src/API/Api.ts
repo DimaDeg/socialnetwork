@@ -8,7 +8,7 @@ const instance = axios.create({
         }
     }
 )
-export const userApi = {
+export const api = {
     getUser(page: number = 1, pageSize: number) {
         return instance.get(`users?page=${page}&count=${pageSize}`,
             {withCredentials: true})
@@ -35,6 +35,13 @@ export const profileApi = {
     },
     updateStatus(statusText: string) {
         return instance.put(`/profile/status`, {status: statusText})
+    },
+    savePhoto(photo: FormData) {
+        return instance.put(`/profile/photo`, photo, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(res => res.data)
     }
 }
 
@@ -43,10 +50,10 @@ export const authApi = {
         return instance.get(`auth/me`)
             .then(res => res.data)
     },
-    login(email:string,password:string,rememberMe: boolean){
-        return instance.post(`auth/login`,{email,password,rememberMe})
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
     },
-    logout(){
+    logout() {
         return instance.delete(`auth/login`)
     }
 }

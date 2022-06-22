@@ -1,4 +1,4 @@
-import {addPostAC, deletePost, setStatus, setUserProfile} from "./reducers/profile-reducer";
+import {addPostAC, changePhoto, deletePost, setStatus, setUserProfile} from "./reducers/profile-reducer";
 import { SendMessageAC} from "./reducers/dialogs-reducer";
 import {
     setActivePage,
@@ -58,5 +58,5 @@ export type ActionTypesType = ReturnType<typeof addPostAC> | ReturnType<typeof S
     ReturnType<typeof followUser> | ReturnType<typeof unfollowUser> | ReturnType<typeof setActivePage> |
     ReturnType<typeof setUsersCount> | ReturnType<typeof toggleIsFetching>| ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData> | ReturnType<typeof toggleIsFollowing> | ReturnType<typeof setInitialized>
-    | ReturnType<typeof setStatus> | ReturnType<typeof deletePost>
+    | ReturnType<typeof setStatus> | ReturnType<typeof deletePost> | ReturnType<typeof changePhoto>
 

@@ -1,7 +1,7 @@
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "../ReduxStore";
 import {ActionTypesType} from "../State";
-import {userApi} from "../../API/UserApi";
+import {api} from "../../API/Api";
 
 export type UsersType = {
     name: string
@@ -103,7 +103,7 @@ type ThunkDispatchActionType = ThunkDispatch<AppStateType, unknown, ActionTypesT
 export const getUsers = (currentPage: number, pageSize: number): ThunkType => async (dispatch: ThunkDispatchActionType) => {
     dispatch(toggleIsFetching())
     dispatch(setActivePage(currentPage))
-    let data = await userApi.getUser(currentPage, pageSize)
+    let data = await api.getUser(currentPage, pageSize)
     dispatch(toggleIsFetching())
     dispatch(setUsers(data.items))
     dispatch(setUsersCount(data.totalCount))
@@ -111,11 +111,11 @@ export const getUsers = (currentPage: number, pageSize: number): ThunkType => as
 }
 
 export const follow = (id: number): ThunkType => async (dispatch: ThunkDispatchActionType) => {
-    await followUnfollowFlow(dispatch,id,userApi.follow.bind(userApi),followUser)
+    await followUnfollowFlow(dispatch,id,api.follow.bind(api),followUser)
 }
 
 export const unfollow = (id: number): ThunkType => async (dispatch: ThunkDispatchActionType) => {
-    await followUnfollowFlow(dispatch,id,userApi.unfollow.bind(userApi),unfollowUser)
+    await followUnfollowFlow(dispatch,id,api.unfollow.bind(api),unfollowUser)
 }
 
 export const followUnfollowFlow = async (dispatch: ThunkDispatchActionType,id:number,apiMethod:any,actionCreator:any) => {

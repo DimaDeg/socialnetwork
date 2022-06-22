@@ -1,7 +1,7 @@
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "../ReduxStore";
 import {ActionTypesType} from "../State";
-import {profileApi} from "../../API/UserApi";
+import {profileApi} from "../../API/Api";
 
 export type PostType = {
     id: number
@@ -65,8 +65,6 @@ export const ProfileReducer = (state: ProfilePageType = initialState, action: Ac
                 likeCount: 0
             };
             return {...state, newPostText: '', posts: [newPost, ...state.posts,]}
-
-
         }
         case 'SET_USER_PROFILE': {
             return {...state, profile: action.profile}
@@ -76,6 +74,9 @@ export const ProfileReducer = (state: ProfilePageType = initialState, action: Ac
         }
         case 'DELETE-POST': {
             return {...state, posts: state.posts.filter(f => f.id !== action.id)}
+        }
+        case 'CHANGE_PHOTO': {
+            return {...state, profile:{...state.profile!,photos:action.photos}}
         }
         default :
             return state
@@ -93,6 +94,8 @@ export const setUserProfile = (profile: ProfileUserType) => ({
 
 export const setStatus = (statusText: string) => ({type: 'SET_STATUS', statusText}) as const
 
+export const changePhoto = (photos:PhotosProfileType) => ({type: 'CHANGE_PHOTO', photos}) as const
+
 export const deletePost = (id: number) => ({
     type: 'DELETE-POST', id
 } as const)
@@ -104,7 +107,7 @@ type ThunkDispatchActionType = ThunkDispatch<AppStateType, unknown, ActionTypesT
 
 export const getProfile = (id: number): ThunkType => async (dispatch: ThunkDispatchActionType) => {
     let res = await profileApi.getProfile(id)
-    dispatch(setUserProfile(res.data))
+    dispatch(setUserProfile(res))
 }
 
 export const getStatus = (userId: number): ThunkType => async (dispatch: ThunkDispatchActionType) => {
@@ -116,5 +119,14 @@ export const updateStatus = (statusText: string): ThunkType => async (dispatch: 
     let res = await profileApi.updateStatus(statusText)
     if (res.data.resultCode === 0) {
         dispatch(setStatus(statusText))
+    }
+}
+
+export const savePhoto = (photo:File): ThunkType => async (dispatch: ThunkDispatchActionType) => {
+    const formData = new FormData()
+    formData.append('image', photo)
+    let data = await profileApi.savePhoto(formData)
+    if (data.resultCode === 0) {
+        dispatch(changePhoto(data.data.photos))
     }
 }
