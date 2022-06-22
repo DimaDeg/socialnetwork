@@ -14,9 +14,7 @@ it('new post should be added', () => {
         //test data
         let action = addPostAC('test')
 
-
         //2.action
-
         let newState = ProfileReducer(initialState, action)
 
         //3.expectation
@@ -29,7 +27,6 @@ it('length of post should be 3', () => {
         let action = addPostAC('test')
 
         //2.action
-
         let newState = ProfileReducer(initialState, action)
 
         //3.expectation
@@ -42,7 +39,6 @@ it('after delete should be decrement', () => {
         let action = deletePost(1)
 
         //2.action
-
         let newState = ProfileReducer(initialState, action)
 
         //3.expectation

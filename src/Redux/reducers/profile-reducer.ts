@@ -87,10 +87,8 @@ export const addPostAC = (post: string) => ({
     type: 'ADD-POST', post
 } as const)
 
-
 export const setUserProfile = (profile: ProfileUserType) => ({
-    type: 'SET_USER_PROFILE',
-    profile
+    type: 'SET_USER_PROFILE', profile
 } as const)
 
 export const setStatus = (statusText: string) => ({type: 'SET_STATUS', statusText}) as const

@@ -4,7 +4,6 @@ import {InitialUsersType} from "../../../Redux/reducers/users-reducer";
 import {Paginator} from "./Paginator";
 import {User} from "./User";
 import {Link} from "react-router-dom";
-import avatar from "../../../assets/images/user.png"
 
 
 type UsersClassType = {
@@ -22,16 +21,16 @@ export const UsersClass: React.FC<UsersClassType> = ({
                                                      }) => {
 
     return <div className={s.back}>
-        <Paginator totalCount={usersPage.totalUsersCount} pageSize={usersPage.totalUsersCount}
-                   onPageChanged={onPageChanged} currentPage={usersPage.currentPage}/>
+        <Paginator totalCount={usersPage.totalUsersCount} pageSize={usersPage.pageSize}
+                   onPageChanged={onPageChanged} currentPage={usersPage.currentPage} partitionSize={10}/>
         <div className={s.users}>
             {usersPage.users.map(f => <div><Link to={`/profile/${f.id}`}>
-                <img src={f.photos.small ? f.photos.small : avatar} alt={f.name}/>
-            </Link>< User key={f.id}
-                          UsersPage={usersPage}
-                          follow={follow}
-                          User={f}
-                          unfollow={unfollow}/></div>)}
+                <User key={f.id}
+                       UsersPage={usersPage}
+                       follow={follow}
+                       User={f}
+                       unfollow={unfollow}/>
+            </Link></div>)}
         </div>
     </div>
 }

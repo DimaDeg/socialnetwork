@@ -26,10 +26,9 @@ class ProfileContainer extends React.Component<ProfileContainerType & { params: 
 
     componentDidMount() {
         let userId = Number(this.props.params.userId)
-        userId = userId ? userId : 2
+        userId = userId ? userId : 23132
         this.props.getProfile(userId)
         this.props.getStatus(userId)
-
     }
 
     render() {

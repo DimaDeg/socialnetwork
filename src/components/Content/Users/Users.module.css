@@ -5,6 +5,9 @@
 }
 .pages{
     display: flex;
+    height: 30px;
+    padding: 10px;
+    align-items: center;
     justify-content: space-around;
 }
 
@@ -20,12 +23,14 @@
     color: white;
     font-size: 16px;
 }
+.page:hover{
+    cursor: pointer;
+}
 
 .selectPage {
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
-    cursor: pointer;
 
 }
 .page:hover{
