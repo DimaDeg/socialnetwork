@@ -9,7 +9,6 @@ type ProfilePropsType = {
     status: string
     updateStatus: (statusText: string) => void
     isOwner: boolean
-    savePhoto: (photo:File) => void
 }
 
 

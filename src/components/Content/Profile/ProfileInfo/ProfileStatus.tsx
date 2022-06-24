@@ -32,6 +32,6 @@ export const ProfileStatus: React.FC<ProfileStatusType> = ({status,updateStatus}
     return <div>
         {editMode ?
             <div><input onBlur={onBlurHandler}  onChange={changeStatus} value={statusText} autoFocus={true}/></div> :
-            <div><span onDoubleClick={editModeTrue} style={{color: 'white'}}>status: {statusText}</span></div>}
+            <div style={{color: 'white',fontSize:20}}><b>Status: </b><span onDoubleClick={editModeTrue}>status: {statusText}</span></div>}
     </div>
 }

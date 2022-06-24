@@ -11,7 +11,6 @@ export type PostType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
     profile: ProfileUserType | null
     status: string
 }
@@ -32,15 +31,16 @@ export type ProfileUserType = {
 }
 
 
-type ContactsProfileType = {
+export type ContactsProfileType = {
+    [key: string]: string
     facebook: string
     github: string
     instagram: string
-    mainLink: null,
+    mainLink: string
     twitter: string
     vk: string
-    website: null
-    youtube: null
+    website: string
+    youtube: string
 }
 
 
@@ -49,7 +49,6 @@ const initialState: ProfilePageType = {
         {id: 1, post: 'First Post', likeCount: 15},
         {id: 2, post: 'Second Post', likeCount: 20}
     ],
-    newPostText: '',
     profile: null,
     status: '',
 }
@@ -64,7 +63,7 @@ export const ProfileReducer = (state: ProfilePageType = initialState, action: Ac
                 post: action.post,
                 likeCount: 0
             };
-            return {...state, newPostText: '', posts: [newPost, ...state.posts,]}
+            return {...state, posts: [newPost, ...state.posts,]}
         }
         case 'SET_USER_PROFILE': {
             return {...state, profile: action.profile}
@@ -76,7 +75,7 @@ export const ProfileReducer = (state: ProfilePageType = initialState, action: Ac
             return {...state, posts: state.posts.filter(f => f.id !== action.id)}
         }
         case 'CHANGE_PHOTO': {
-            return {...state, profile:{...state.profile!,photos:action.photos}}
+            return {...state, profile: {...state.profile!, photos: action.photos}}
         }
         default :
             return state
@@ -94,7 +93,7 @@ export const setUserProfile = (profile: ProfileUserType) => ({
 
 export const setStatus = (statusText: string) => ({type: 'SET_STATUS', statusText}) as const
 
-export const changePhoto = (photos:PhotosProfileType) => ({type: 'CHANGE_PHOTO', photos}) as const
+export const changePhoto = (photos: PhotosProfileType) => ({type: 'CHANGE_PHOTO', photos}) as const
 
 export const deletePost = (id: number) => ({
     type: 'DELETE-POST', id
@@ -122,11 +121,24 @@ export const updateStatus = (statusText: string): ThunkType => async (dispatch: 
     }
 }
 
-export const savePhoto = (photo:File): ThunkType => async (dispatch: ThunkDispatchActionType) => {
+export const savePhoto = (photo: File): ThunkType => async (dispatch: ThunkDispatchActionType) => {
     const formData = new FormData()
     formData.append('image', photo)
     let data = await profileApi.savePhoto(formData)
     if (data.resultCode === 0) {
         dispatch(changePhoto(data.data.photos))
+    }
+}
+
+export const saveProfileInfo = (profileInfo: any) => async (dispatch: ThunkDispatchActionType, getState: () => AppStateType) => {
+    const ownerId = getState().Auth.id
+    const res = await profileApi.updateProfileInfo(profileInfo)
+    try {
+        if (res.data.resultCode === 0) {
+            dispatch(getProfile(ownerId!))
+        }
+    }
+    catch (err){
+        setStatus('Incorrect')
     }
 }

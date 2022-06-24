@@ -7,4 +7,36 @@
     max-width: 300px;
     max-height: 300px;
 }
-
+.contacts{
+    padding-left: 20px;
+    font-size: 16px;
+    color: white;
+}
+.info{
+    font-size: 20px;
+    color: white;
+}
+.input{
+    background-color: #192734;
+    width: 200px;
+    color: white;
+    height: 30px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #15202B;
+}
+.input:focus{
+    background-color: #192740;
+    border: 1px solid #15202B;
+}
+.error{
+    display: flex;
+    justify-content: center;
+    color: red;
+}
+.item{
+    display: flex;
+    justify-content: center;
+    width: 250px;
+    height: 60px;
+}

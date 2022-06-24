@@ -42,6 +42,9 @@ export const profileApi = {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(res => res.data)
+    },
+    updateProfileInfo(profileInfo: any) {
+        return instance.put('profile/', profileInfo)
     }
 }
 
@@ -57,3 +60,6 @@ export const authApi = {
         return instance.delete(`auth/login`)
     }
 }
+
+//types
+export type Nullable<T> = T | null

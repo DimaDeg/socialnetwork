@@ -1,10 +1,12 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {ProfileUserType, savePhoto} from "../../../../Redux/reducers/profile-reducer";
 import {Preloader} from "../../Common/Preloader/Preloader";
 import userPhoto from '../../../../assets/images/user.png'
 import {ProfileStatus} from "./ProfileStatus";
 import s from './ProfileInfo.module.css'
 import {useDispatch} from "react-redux";
+import {ProfileData} from "./ProfileData";
+import {ProfileDataForm} from "./ProfileDataForm";
 
 
 type ProfileInfoPropsType = {
@@ -12,11 +14,12 @@ type ProfileInfoPropsType = {
     status: string
     updateStatus: (statusText: string) => void
     isOwner: boolean,
-    savePhoto: (photo: File) => void
+
 }
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, isOwner, ...props}) => {
     const dispatch = useDispatch()
+    const [editMode, setEditMode] = useState<boolean>(false)
 
     if (!profile) {
         return <Preloader/>
@@ -27,12 +30,19 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, isOwner, .
         }
     }
 
+    const toggleEditMode = () => {
+        setEditMode(!editMode)
+    }
+
     return (
         <div>
             <img className={s.ava} src={profile && profile.photos.large ? profile.photos.large : userPhoto}
                  alt={''}/>
             {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
-            <span style={{color: 'white', fontSize: 20}}>{profile && profile.fullName}</span>
+            {isOwner && !editMode ? <div><button onClick={toggleEditMode}>Edit</button>
+            </div>:''}
+            {!editMode ? <ProfileData profile={profile}/> : <ProfileDataForm profile={profile} toggleEditMode={toggleEditMode}/>}
+
             <ProfileStatus {...props}/>
         </div>
     )

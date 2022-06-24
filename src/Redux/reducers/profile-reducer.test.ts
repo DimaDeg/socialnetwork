@@ -5,7 +5,6 @@ const initialState: ProfilePageType = {
         {id: 1, post: 'First Post', likeCount: 15},
         {id: 2, post: 'Second Post', likeCount: 20}
     ],
-    newPostText: '',
     profile: null,
     status: '',
 }
