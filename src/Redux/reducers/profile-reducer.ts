@@ -139,6 +139,6 @@ export const saveProfileInfo = (profileInfo: any) => async (dispatch: ThunkDispa
         }
     }
     catch (err){
-        setStatus('Incorrect')
+        dispatch(setStatus(res.data.messages[0]))
     }
 }

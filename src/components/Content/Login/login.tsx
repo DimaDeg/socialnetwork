@@ -10,7 +10,8 @@ import s from './login.module.css'
 type InitialValuesType = {
     email: string,
     password: string,
-    rememberMe: boolean
+    rememberMe: boolean,
+    captcha?: string
 }
 
 const SignupSchema = Yup.object().shape({
@@ -22,11 +23,13 @@ export const Login = () => {
 
     const dispatch = useDispatch()
     const {isAuth} = useSelector<AppStateType, AuthType>(state => state.Auth)
+    const {captchaUrl} = useSelector<AppStateType,AuthType>(state => state.Auth)
 
     const InitialValues: InitialValuesType = {
         email: '',
         password: '',
-        rememberMe: false
+        rememberMe: false,
+        captcha:''
     }
 
     const onSubmit = (values: InitialValuesType) => {
@@ -46,7 +49,8 @@ export const Login = () => {
                 </div>
                 <div className={s.item}>
                     <label htmlFor={'password'}>
-                        <Field className={s.input} placeholder={'password'} type={'password'} name={'password'} id={'password'}/>
+                        <Field className={s.input} placeholder={'password'} type={'password'} name={'password'}
+                               id={'password'}/>
                         <ErrorMessage name={'password'} render={msg => (<div className={s.error}>{msg}</div>)}/>
                     </label>
                 </div>
@@ -55,6 +59,17 @@ export const Login = () => {
                         <Field type={'checkbox'} name={'rememberMe'} id={'rememberMe'}/>
                     </label>
                 </div>
+                {captchaUrl &&
+                    <div className={s.captcha}>
+                        <div><img src={captchaUrl!} alt={'captcha'}/></div>
+                        <div className={s.item}>
+                            <label htmlFor={'captcha'}>
+                                <Field className={s.input} type={'text'} name={'captcha'} id={'captcha'}/>
+                            </label>
+                        </div>
+
+                    </div>
+                }
                 <div className={s.item}>
                     <button className={s.button} type={'submit'}>Login</button>
                 </div>

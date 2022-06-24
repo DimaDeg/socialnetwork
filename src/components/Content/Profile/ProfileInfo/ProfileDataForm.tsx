@@ -50,7 +50,6 @@ export const ProfileDataForm: React.FC<ProfileDataFormType> = ({profile, toggleE
         fullName: Yup.string().required('Full name is Required').typeError('Required'),
         aboutMe: Yup.string().required('Required').typeError('Required'),
         lookingForAJobDescription: Yup.string().required('Required').typeError('Required'),
-        key: Yup.string().required('Required').typeError('Incorrect')
     })
 
     return (<div className={s.info}>
@@ -78,8 +77,6 @@ export const ProfileDataForm: React.FC<ProfileDataFormType> = ({profile, toggleE
                     <div className={s.contacts} key={key}>
                         <label htmlFor={key}><b>{key}: </b>
                             <Field classname={s.input} name={'contacts.'+key} id={key}/>
-                            <ErrorMessage name={'key'}
-                                          render={msg => (<div className={s.error}>{msg}</div>)}/>
                         </label>
                     </div>
                 )

@@ -7,7 +7,7 @@ import {
     unfollowUser,
     setUsersCount, toggleIsFetching, toggleIsFollowing
 } from "./reducers/users-reducer";
-import {setAuthUserData} from "./reducers/auth-reducer";
+import {getCaptchaUrlSuccess, setAuthUserData} from "./reducers/auth-reducer";
 import {setInitialized} from "./reducers/app-reducer";
 
 type MessageType = {
@@ -58,5 +58,5 @@ export type ActionTypesType = ReturnType<typeof addPostAC> | ReturnType<typeof S
     ReturnType<typeof followUser> | ReturnType<typeof unfollowUser> | ReturnType<typeof setActivePage> |
     ReturnType<typeof setUsersCount> | ReturnType<typeof toggleIsFetching>| ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData> | ReturnType<typeof toggleIsFollowing> | ReturnType<typeof setInitialized>
-    | ReturnType<typeof setStatus> | ReturnType<typeof deletePost> | ReturnType<typeof changePhoto>
+    | ReturnType<typeof setStatus> | ReturnType<typeof deletePost> | ReturnType<typeof changePhoto> | ReturnType<typeof getCaptchaUrlSuccess>
 

@@ -61,5 +61,11 @@ export const authApi = {
     }
 }
 
+export const securityApi = {
+    getCaptcha(){
+        return instance.get(`security/get-captcha-url`)
+    }
+}
+
 //types
 export type Nullable<T> = T | null
