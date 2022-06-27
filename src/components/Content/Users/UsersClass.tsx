@@ -31,6 +31,8 @@ export const UsersClass: React.FC<UsersClassType> = ({
                        User={f}
                        unfollow={unfollow}/>
             </Link></div>)}
+            <Paginator totalCount={usersPage.totalUsersCount} pageSize={usersPage.pageSize}
+                       onPageChanged={onPageChanged} currentPage={usersPage.currentPage} partitionSize={10}/>
         </div>
     </div>
 }

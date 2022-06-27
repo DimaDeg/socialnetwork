@@ -1,6 +1,6 @@
 import {ContactsProfileType, ProfileUserType, saveProfileInfo} from "../../../../Redux/reducers/profile-reducer";
 import React from "react";
-import {Nullable} from "../../../../API/Api";
+import {Nullable} from "../../../../API/api";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useDispatch} from "react-redux";
 import s from './ProfileInfo.module.css'

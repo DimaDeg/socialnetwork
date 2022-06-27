@@ -1,7 +1,7 @@
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "../ReduxStore";
 import {ActionTypesType} from "../State";
-import {api} from "../../API/Api";
+import {api} from "../../API/api";
 
 export type UsersType = {
     name: string

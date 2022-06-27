@@ -1,7 +1,7 @@
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "../ReduxStore";
 import {ActionTypesType} from "../State";
-import {profileApi} from "../../API/Api";
+import {profileApi} from "../../API/api";
 
 export type PostType = {
     id: number
@@ -115,9 +115,14 @@ export const getStatus = (userId: number): ThunkType => async (dispatch: ThunkDi
 }
 
 export const updateStatus = (statusText: string): ThunkType => async (dispatch: ThunkDispatchActionType) => {
-    let res = await profileApi.updateStatus(statusText)
-    if (res.data.resultCode === 0) {
-        dispatch(setStatus(statusText))
+    try {
+        let res = await profileApi.updateStatus(statusText)
+        if (res.data.resultCode === 0) {
+            dispatch(setStatus(statusText))
+        }
+    }
+    catch (e){
+        console.log(e)
     }
 }
 

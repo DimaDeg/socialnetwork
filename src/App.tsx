@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react';
 import './App.css';
 import {Navbar} from './components/Navigate/Navbar';
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import {News} from './components/Content/News/News';
 import {Music} from './components/Content/Music/Music';
 import {Settings} from './components/Content/Settings/Settings';
@@ -25,7 +25,8 @@ export const PATH = {
     MUSIC: '/Music',
     SETTINGS: '/Settings',
     USERS: '/Users',
-    LOGIN: '/login'
+    LOGIN: '/login',
+    404: '/404'
 }
 
 type AppType = MapDispatchToPropsType & MapStateToPropsType
@@ -40,9 +41,12 @@ type MapStateToPropsType = {
 
 class App extends React.Component<AppType> {
 
+
+
     componentDidMount() {
         this.props.initializeApp()
     }
+
 
     render() {
         if (!this.props.initialized) {
@@ -58,12 +62,14 @@ class App extends React.Component<AppType> {
                         <Routes>
                             <Route path={PATH.PROFILE} element={<ProfileContainer/>}/>
                             <Route path={'/Profile/:userId'} element={<ProfileContainer/>}/>
+                            <Route path="/" element={<Navigate to="/profile" />} />
                             <Route path={PATH.DIALOGS} element={<DialogsContainer/>}/>
                             <Route path={PATH.USERS} element={<UsersContainer/>}/>
                             <Route path={PATH.NEWS} element={<News/>}/>
                             <Route path={PATH.MUSIC} element={<Music/>}/>
                             <Route path={PATH.SETTINGS} element={<Settings/>}/>
                             <Route path={PATH.LOGIN} element={<Login/>}/>
+                            <Route path={'*'} element={<div>404 NOT FOUND</div>}/>
                         </Routes>
                     </Suspense>
                 </div>

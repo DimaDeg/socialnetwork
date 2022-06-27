@@ -1,7 +1,7 @@
 import {ActionTypesType} from "../State";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "../ReduxStore";
-import {authApi, Nullable, securityApi} from "../../API/Api";
+import {authApi, Nullable, securityApi} from "../../API/api";
 
 export type AuthType = {
     id: number | null
